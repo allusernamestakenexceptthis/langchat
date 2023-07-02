@@ -62,9 +62,6 @@ func (uc *UserConnection) ReadMessages() {
 			break
 		}
 
-		//send message to message queue
-		//send message to other users
-		//uc.chatRoom.SendMessage(string(msg))
 		log.Printf("msgType: %d, msg: %s", msgType, msg)
 
 		for user := range uc.chatRoom.users {
@@ -130,22 +127,6 @@ func (c *chatRoom) webSocket(ctx echo.Context) error {
 		return err
 	}
 
-	//get message from message queue
-	//send message to user
-
-	// Write
-	/*
-		err := ws.WriteMessage(websocket.TextMessage, []byte("Hello, Client!"))
-		if err != nil {
-			ctx.Logger().Error(err)
-		}
-
-		// Read
-		_, msg, err := ws.ReadMessage()
-		if err != nil {
-			ctx.Logger().Error(err)
-		}
-		fmt.Printf("%s\n", msg)*/
 	user := new(user.User)
 	UserConn := NewUserConnection(user, ws, c)
 	c.addUser(UserConn)
